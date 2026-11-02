@@ -1,0 +1,20 @@
+{% extends 'base.html' %}
+{% block title %}Dashboard · StorePro{% endblock %}
+{% block content %}
+<div class="page">
+  <header class="page__header"><div><h1 class="page__title">Dashboard</h1><p class="page__subtitle">Tổng quan tình hình kinh doanh và kho hàng</p></div></header>
+  <section class="kpi-grid">
+    <article class="kpi card"><span class="kpi__icon"><i class="fa-solid fa-box"></i></span><span class="kpi__copy"><span class="kpi__label">Tổng sản phẩm</span><strong class="kpi__value">1,248</strong></span></article>
+    <article class="kpi card"><span class="kpi__icon kpi__icon--success"><i class="fa-solid fa-warehouse"></i></span><span class="kpi__copy"><span class="kpi__label">Tồn kho hiện tại</span><strong class="kpi__value">8,432</strong></span></article>
+    <article class="kpi card"><span class="kpi__icon kpi__icon--warning"><i class="fa-solid fa-receipt"></i></span><span class="kpi__copy"><span class="kpi__label">Đơn hôm nay</span><strong class="kpi__value">25</strong></span></article>
+    <article class="kpi card"><span class="kpi__icon kpi__icon--purple"><i class="fa-solid fa-coins"></i></span><span class="kpi__copy"><span class="kpi__label">Doanh thu</span><strong class="kpi__value">12,450,000đ</strong></span></article>
+    <article class="kpi card"><span class="kpi__icon kpi__icon--danger"><i class="fa-solid fa-triangle-exclamation"></i></span><span class="kpi__copy"><span class="kpi__label">Sắp hết hàng</span><strong class="kpi__value">18</strong></span></article>
+  </section>
+  <div class="grid grid--dashboard">
+    <article class="card chart-card"><div class="card__header"><h2 class="section-title">Doanh thu theo ngày</h2></div><div class="chart-wrap"><canvas id="dashboardChart"></canvas></div></article>
+    <article class="card data-card"><div class="card__header"><h2 class="section-title">Top sản phẩm</h2></div><div class="card__body table-wrap"><table class="table"><thead><tr><th>Sản phẩm</th><th>Đã bán</th></tr></thead><tbody><tr><td><a href="#">Áo thun</a></td><td>245</td></tr><tr><td><a href="#">Giày thể thao</a></td><td>186</td></tr><tr><td><a href="#">Balo laptop</a></td><td>142</td></tr><tr><td><a href="#">Quần jean</a></td><td>128</td></tr></tbody></table></div></article>
+    <article class="card data-card"><div class="card__header"><h2 class="section-title">Đơn hàng gần đây</h2></div><div class="card__body table-wrap"><table class="table"><thead><tr><th>Mã đơn</th><th>Khách hàng</th><th>Tổng tiền</th><th>Trạng thái</th></tr></thead><tbody><tr><td><a href="#">DH001234</a></td><td>Nguyễn Văn B</td><td>1,250,000đ</td><td><span class="badge">Đang xử lý</span></td></tr><tr><td><a href="#">DH001233</a></td><td>Trần Thị C</td><td>850,000đ</td><td><span class="badge badge--warning">Chờ xác nhận</span></td></tr><tr><td><a href="#">DH001232</a></td><td>Lê Văn D</td><td>2,450,000đ</td><td><span class="badge badge--purple">Đang giao</span></td></tr><tr><td><a href="#">DH001231</a></td><td>Phạm Thị E</td><td>680,000đ</td><td><span class="badge badge--success">Hoàn thành</span></td></tr></tbody></table></div></article>
+    <article class="card data-card"><div class="card__header"><h2 class="section-title">Cảnh báo tồn kho</h2></div><div class="card__body table-wrap"><table class="table"><thead><tr><th>Sản phẩm</th><th>Tồn</th><th>Ngưỡng</th></tr></thead><tbody><tr><td><a href="#">Áo thun</a></td><td>3</td><td>≤10</td></tr><tr><td><a href="#">Giày thể thao</a></td><td>5</td><td>≤10</td></tr><tr><td><a href="#">Balo laptop</a></td><td>8</td><td>≤10</td></tr><tr><td><a href="#">Áo khoác</a></td><td>15</td><td>≤20</td></tr></tbody></table></div></article>
+  </div>
+</div>
+{% endblock %}

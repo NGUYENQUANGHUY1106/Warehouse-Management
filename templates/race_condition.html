@@ -1,0 +1,12 @@
+{% extends 'base.html' %}
+{% block title %}Đặt hàng đồng thời · StorePro{% endblock %}
+{% block content %}
+<div class="page">
+  <header class="page__header"><div><h1 class="page__title">Đặt hàng đồng thời</h1><p class="page__subtitle">Xử lý giữ hàng và xung đột tồn kho realtime</p></div></header>
+  <div class="grid grid--dashboard">
+    <article class="card race-product"><h2>Giày thể thao GT002</h2><div class="race-stats"><span>Tồn vật lý: 5</span><strong>Đang giữ: 4</strong><strong>Khả dụng: 1</strong></div><div class="alert alert--info"><i class="fa-solid fa-lock"></i><div><strong>Đang giữ hàng cho phiên thanh toán</strong><span>Thời gian còn lại: 04:32</span></div></div><div class="race-actions"><button class="button button--primary">Tiếp tục thanh toán</button></div></article>
+    <aside class="card conflict"><h2>Xung đột tồn kho</h2><strong class="text-danger">Sản phẩm vừa được người khác đặt.<br>Vui lòng cập nhật số lượng.</strong><p class="muted">Optimistic UI đã rollback về số lượng khả dụng mới.</p><button class="button button--danger">Chọn lại số lượng</button></aside>
+  </div>
+  <article class="card data-card" style="margin-top:24px"><div class="card__header"><h2 class="section-title">Realtime reservation log</h2></div><div class="card__body table-wrap"><table class="table table--roomy"><thead><tr><th>Thời gian</th><th>Phiên</th><th>Sản phẩm</th><th>Hành động</th><th>Kết quả</th></tr></thead><tbody><tr><td><a href="#">14:21:02</a></td><td>User A</td><td>GT002</td><td>Giữ 4</td><td><span class="badge badge--success">Thành công</span></td></tr><tr><td><a href="#">14:21:05</a></td><td>User B</td><td>GT002</td><td>Giữ 3</td><td><span class="badge badge--danger">Xung đột</span></td></tr><tr><td><a href="#">14:21:06</a></td><td>System</td><td>GT002</td><td>Rollback</td><td>Tồn khả dụng = 1</td></tr></tbody></table></div></article>
+</div>
+{% endblock %}

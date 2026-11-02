@@ -1,0 +1,18 @@
+{% extends 'base.html' %}
+{% block title %}Gian hàng · StorePro{% endblock %}
+{% block content %}
+<div class="page">
+  <header class="page__header"><div><h1 class="page__title">Gian hàng</h1><p class="page__subtitle">Thông tin và cấu hình cửa hàng</p></div></header>
+  <section class="store-banner"><div><h2>STOREPRO SHOP</h2><p>Đà Nẵng • Đang hoạt động</p></div><div><button class="button button--primary" data-modal-open="Chỉnh sửa gian hàng"><i class="fa-solid fa-pen"></i> Chỉnh sửa gian hàng</button></div></section>
+  <section class="kpi-grid kpi-grid--four">
+    <article class="kpi card"><span class="kpi__icon"><i class="fa-solid fa-receipt"></i></span><span class="kpi__copy"><span class="kpi__label">Đơn tháng này</span><strong class="kpi__value">842</strong></span></article>
+    <article class="kpi card"><span class="kpi__icon kpi__icon--success"><i class="fa-solid fa-chart-line"></i></span><span class="kpi__copy"><span class="kpi__label">Doanh thu</span><strong class="kpi__value">328,5M</strong></span></article>
+    <article class="kpi card"><span class="kpi__icon kpi__icon--warning"><i class="fa-solid fa-users"></i></span><span class="kpi__copy"><span class="kpi__label">Khách hàng</span><strong class="kpi__value">1,540</strong></span></article>
+    <article class="kpi card"><span class="kpi__icon kpi__icon--purple"><i class="fa-solid fa-star"></i></span><span class="kpi__copy"><span class="kpi__label">Đánh giá</span><strong class="kpi__value">4.8/5</strong></span></article>
+  </section>
+  <div class="grid grid--equal">
+    <article class="card card--padded"><h2 class="section-title">Thông tin cửa hàng</h2><div class="stack" style="margin-top:24px;gap:22px"><span>Tên cửa hàng: StorePro Shop</span><span>SĐT: 0901 234 567</span><span>Email: hello@storepro.vn</span><span>Địa chỉ: Hải Châu, Đà Nẵng</span><span>Giờ mở cửa: 08:00 - 22:00</span></div></article>
+    <article class="card card--padded"><h2 class="section-title">Thiết lập nhanh</h2><div class="quick-links" style="margin-top:18px"><a class="quick-link" href="#">Logo &amp; Banner <i class="fa-solid fa-chevron-right"></i></a><a class="quick-link" href="#">Phương thức thanh toán <i class="fa-solid fa-chevron-right"></i></a><a class="quick-link" href="#">Vận chuyển <i class="fa-solid fa-chevron-right"></i></a><a class="quick-link" href="#">Địa chỉ kho <i class="fa-solid fa-chevron-right"></i></a><a class="quick-link" href="#">Thông báo cửa hàng <i class="fa-solid fa-chevron-right"></i></a></div></article>
+  </div>
+</div>
+{% endblock %}

@@ -1,0 +1,105 @@
+{% load static %}
+<!doctype html>
+<html lang="vi">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>{% block title %}StorePro{% endblock %}</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.6.0/css/all.min.css">
+  <link rel="stylesheet" href="{% static 'css/style.css' %}">
+  <script src="https://cdn.jsdelivr.net/npm/chart.js@4.4.4/dist/chart.umd.min.js" defer></script>
+  <script src="{% static 'js/main.js' %}" defer></script>
+</head>
+<body class="app-shell {% block body_class %}{% endblock %}">
+  {% if user.is_authenticated %}
+  <aside class="sidebar" id="sidebar">
+    <a class="sidebar__brand" href="{% url 'dashboard' %}">
+      <span class="sidebar__mark">◇</span>
+      <span class="sidebar__brand-copy"><strong>StorePro</strong><small>Quản lý kho &amp; đơn hàng</small></span>
+    </a>
+    <nav class="sidebar__nav" aria-label="Điều hướng chính">
+      <a class="sidebar__link {% if request.resolver_match.url_name == 'dashboard' %}is-active{% endif %}" href="{% url 'dashboard' %}"><i class="fa-solid fa-chart-pie"></i><span>Dashboard</span></a>
+      {% if is_store_admin or 'store.view' in rbac_permissions %}
+      <a class="sidebar__link {% if request.resolver_match.url_name == 'store_management' %}is-active{% endif %}" href="{% url 'store_management' %}"><i class="fa-solid fa-store"></i><span>Gian hàng</span></a>
+      {% endif %}
+      {% if is_store_admin or 'product.view' in rbac_permissions %}
+      <a class="sidebar__link {% if request.resolver_match.url_name == 'product_list' %}is-active{% endif %}" href="{% url 'product_list' %}"><i class="fa-solid fa-box"></i><span>Sản phẩm</span></a>
+      {% endif %}
+      {% if is_store_admin or 'stockin.view' in rbac_permissions %}
+      <a class="sidebar__link {% if request.resolver_match.url_name == 'stock_in' %}is-active{% endif %}" href="{% url 'stock_in' %}"><i class="fa-solid fa-arrow-down"></i><span>Nhập kho</span></a>
+      {% endif %}
+      {% if is_store_admin or 'stockout.view' in rbac_permissions %}
+      <a class="sidebar__link {% if request.resolver_match.url_name == 'stock_out' %}is-active{% endif %}" href="{% url 'stock_out' %}"><i class="fa-solid fa-arrow-up"></i><span>Xuất kho</span></a>
+      {% endif %}
+      {% if is_store_admin or 'inventory.view' in rbac_permissions %}
+      <a class="sidebar__link {% if request.resolver_match.url_name == 'inventory' %}is-active{% endif %}" href="{% url 'inventory' %}"><i class="fa-solid fa-warehouse"></i><span>Tồn kho</span></a>
+      {% endif %}
+      {% if is_store_admin or 'order.view' in rbac_permissions %}
+      <a class="sidebar__link {% if request.resolver_match.url_name == 'orders' or request.resolver_match.url_name == 'race_condition' %}is-active{% endif %}" href="{% url 'orders' %}"><i class="fa-solid fa-receipt"></i><span>Đơn hàng</span></a>
+      {% endif %}
+      {% if is_store_admin or 'customer.view' in rbac_permissions %}
+      <a class="sidebar__link {% if request.resolver_match.url_name == 'customers' %}is-active{% endif %}" href="{% url 'customers' %}"><i class="fa-solid fa-users"></i><span>Khách hàng</span></a>
+      {% endif %}
+      {% if is_store_admin or 'supplier.view' in rbac_permissions %}
+      <a class="sidebar__link {% if request.resolver_match.url_name == 'suppliers' %}is-active{% endif %}" href="{% url 'suppliers' %}"><i class="fa-solid fa-truck-field"></i><span>Nhà cung cấp</span></a>
+      {% endif %}
+      {% if is_store_admin or 'user.view' in rbac_permissions %}
+      <a class="sidebar__link {% if request.resolver_match.url_name == 'staff' %}is-active{% endif %}" href="{% url 'staff' %}"><i class="fa-solid fa-user-shield"></i><span>Nhân viên &amp; phân quyền</span></a>
+      {% endif %}
+      {% if is_store_admin or 'report.view' in rbac_permissions %}
+      <a class="sidebar__link {% if request.resolver_match.url_name == 'reports' %}is-active{% endif %}" href="{% url 'reports' %}"><i class="fa-solid fa-chart-line"></i><span>Báo cáo</span></a>
+      {% endif %}
+      {% if is_store_admin or 'audit.view' in rbac_permissions %}
+      <a class="sidebar__link {% if request.resolver_match.url_name == 'audit_logs' %}is-active{% endif %}" href="{% url 'audit_logs' %}"><i class="fa-solid fa-clock-rotate-left"></i><span>Lịch sử thay đổi</span></a>
+      {% endif %}
+      {% if is_store_admin or 'store.manage' in rbac_permissions %}
+      <a class="sidebar__link {% if request.resolver_match.url_name == 'settings' %}is-active{% endif %}" href="{% url 'settings' %}"><i class="fa-solid fa-gear"></i><span>Cài đặt</span></a>
+      {% endif %}
+    </nav>
+    <div class="sidebar__profile">
+      <span class="avatar avatar--small">{{ user.first_name|first|default:user.username|first|upper }}{{ user.last_name|first|upper }}</span>
+      <span><strong>{{ user.get_full_name|default:user.username }}</strong><small>{% if active_membership %}{{ active_membership.role.name }}{% else %}Quản trị hệ thống{% endif %}</small></span>
+    </div>
+  </aside>
+
+  <header class="topbar">
+    <button class="icon-button topbar__menu" type="button" data-sidebar-toggle aria-label="Thu gọn menu"><i class="fa-solid fa-bars"></i></button>
+    <label class="topbar__search"><i class="fa-solid fa-magnifying-glass"></i><input type="search" placeholder="Tìm kiếm sản phẩm, đơn hàng, khách hàng..."></label>
+    <div class="topbar__actions">
+      {% if available_memberships|length > 1 %}
+      <form method="post" action="{% url 'switch_store' %}" class="store-switcher">
+        {% csrf_token %}<input type="hidden" name="next" value="{{ request.path }}">
+        <select name="store" aria-label="Chọn gian hàng" onchange="this.form.submit()">
+          {% for membership in available_memberships %}<option value="{{ membership.store_id }}" {% if active_store.id == membership.store_id %}selected{% endif %}>{{ membership.store.name }}</option>{% endfor %}
+        </select>
+      </form>
+      {% endif %}
+      <button class="icon-button" type="button" aria-label="Thông báo"><i class="fa-solid fa-bell"></i><span class="topbar__dot"></span></button>
+      <button class="icon-button" type="button" data-theme-toggle aria-label="Đổi giao diện"><i class="fa-solid fa-circle-half-stroke"></i></button>
+      <button class="topbar__user" type="button"><span class="avatar">{{ user.first_name|first|default:user.username|first|upper }}{{ user.last_name|first|upper }}</span><strong>{{ user.get_full_name|default:user.username }}</strong></button>
+      <form method="post" action="{% url 'logout' %}">{% csrf_token %}<button class="icon-button" type="submit" title="Đăng xuất"><i class="fa-solid fa-arrow-right-from-bracket"></i></button></form>
+    </div>
+  </header>
+  {% endif %}
+
+  <main class="main-content">
+    {% block content %}{% endblock %}
+  </main>
+
+  <div class="modal" id="global-modal" aria-hidden="true">
+    <div class="modal__backdrop" data-modal-close></div>
+    <div class="modal__dialog" role="dialog" aria-modal="true" aria-labelledby="modal-title">
+      <button class="modal__close" data-modal-close aria-label="Đóng"><i class="fa-solid fa-xmark"></i></button>
+      <h2 id="modal-title">Thao tác mới</h2>
+      <p class="muted">Đây là modal giao diện mẫu. Dữ liệu chưa được gửi tới máy chủ.</p>
+      <form class="form" data-validate>
+        <label class="form__group"><span>Tên <b>*</b></span><input required placeholder="Nhập thông tin"></label>
+        <div class="modal__actions"><button class="button button--secondary" type="button" data-modal-close>Hủy</button><button class="button button--primary" type="submit">Lưu</button></div>
+      </form>
+    </div>
+  </div>
+</body>
+</html>

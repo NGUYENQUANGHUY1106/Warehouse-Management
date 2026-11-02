@@ -1,0 +1,27 @@
+{% extends 'base.html' %}
+{% block title %}Đăng nhập · StorePro{% endblock %}
+{% block body_class %}login-page{% endblock %}
+{% block content %}
+<div class="login-layout">
+  <section class="login-hero">
+    <h2 class="login-hero__brand">StorePro</h2>
+    <h1>Quản lý kho hàng<br>đơn giản và hiệu quả</h1>
+    <p>Tồn kho realtime • Đơn hàng • Báo cáo • Phân quyền</p>
+  </section>
+  <section class="login-panel">
+    <div class="login-card card">
+      <h2>Đăng nhập</h2>
+      {% for message in messages %}<div class="alert {% if message.tags == 'error' %}alert--danger{% else %}alert--info{% endif %}">{{ message }}</div>{% endfor %}
+      <form class="form" method="post" action="{% url 'login' %}" data-server-form>
+        {% csrf_token %}
+        <input type="hidden" name="next" value="{{ request.GET.next }}">
+        <label class="form__group"><span>Email hoặc tên đăng nhập</span><input name="identifier" autocomplete="username" required placeholder="admin@storepro.vn"></label>
+        <label class="form__group"><span>Mật khẩu</span><input name="password" type="password" autocomplete="current-password" required placeholder="••••••••"></label>
+        <div class="login-card__options"><span>Phiên đăng nhập được bảo vệ bằng Django Session</span></div>
+        <button class="button button--primary button--block" type="submit">Đăng nhập</button>
+        <p class="login-card__foot">Tài khoản nhân viên do Admin tạo và gán vai trò.</p>
+      </form>
+    </div>
+  </section>
+</div>
+{% endblock %}

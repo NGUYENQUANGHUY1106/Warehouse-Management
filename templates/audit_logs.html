@@ -1,0 +1,11 @@
+{% extends 'base.html' %}
+{% block title %}Lịch sử thay đổi · StorePro{% endblock %}
+{% block content %}
+<div class="page">
+  <header class="page__header"><div><h1 class="page__title">Lịch sử thay đổi</h1><p class="page__subtitle">Audit log bất biến và so sánh dữ liệu</p></div></header>
+  <div class="grid grid--dashboard">
+    <article class="card data-card"><div class="card__header"><h2 class="section-title">Audit Log</h2></div><div class="card__body table-wrap"><table class="table table--roomy"><thead><tr><th>Thời gian</th><th>Người dùng</th><th>Hành động</th><th>Đối tượng</th><th>IP</th></tr></thead><tbody><tr><td><a href="#">14:22</a></td><td>Nguyễn Văn A</td><td><span class="badge">Sửa</span></td><td>SP001</td><td>113.161.x.x</td></tr><tr><td><a href="#">14:18</a></td><td>Trần Thị B</td><td><span class="badge badge--success">Nhập kho</span></td><td>PN00124</td><td>113.161.x.x</td></tr><tr><td><a href="#">14:10</a></td><td>Lê Văn C</td><td><span class="badge badge--warning">Xuất kho</span></td><td>PX00124</td><td>14.191.x.x</td></tr><tr><td><a href="#">13:58</a></td><td>System</td><td><span class="badge badge--neutral">Đăng nhập</span></td><td>User A</td><td>113.161.x.x</td></tr></tbody></table></div></article>
+    <aside class="card card--padded"><h2 class="section-title">Chi tiết thay đổi</h2><p class="muted">SP001 · Giá bán</p><div class="diff"><div class="diff__box diff__box--old"><small>GIÁ TRỊ CŨ</small><strong>120,000đ</strong></div><div class="diff__box diff__box--new"><small>GIÁ TRỊ MỚI</small><strong>135,000đ</strong></div><div class="alert alert--info"><i class="fa-solid fa-lock"></i><span>Log này là immutable và không thể xóa.</span></div></div></aside>
+  </div>
+</div>
+{% endblock %}

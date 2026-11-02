@@ -1,0 +1,15 @@
+{% extends 'base.html' %}
+{% block title %}Sản phẩm · StorePro{% endblock %}
+{% block content %}
+<div class="page">
+  <header class="page__header"><div><h1 class="page__title">Sản phẩm</h1><p class="page__subtitle">Quản lý sản phẩm, danh mục và biến thể</p></div><button class="button button--primary" data-modal-open="Thêm sản phẩm">+ Thêm sản phẩm</button></header>
+  <section class="kpi-grid kpi-grid--four">
+    <article class="kpi card"><span class="kpi__icon"><i class="fa-solid fa-boxes-stacked"></i></span><span class="kpi__copy"><span class="kpi__label">Tổng sản phẩm</span><strong class="kpi__value">1,248</strong></span></article>
+    <article class="kpi card"><span class="kpi__icon kpi__icon--success"><i class="fa-solid fa-check"></i></span><span class="kpi__copy"><span class="kpi__label">Đang bán</span><strong class="kpi__value">1,146</strong></span></article>
+    <article class="kpi card"><span class="kpi__icon kpi__icon--warning"><i class="fa-solid fa-hourglass-half"></i></span><span class="kpi__copy"><span class="kpi__label">Sắp hết</span><strong class="kpi__value">18</strong></span></article>
+    <article class="kpi card"><span class="kpi__icon kpi__icon--danger"><i class="fa-solid fa-xmark"></i></span><span class="kpi__copy"><span class="kpi__label">Hết hàng</span><strong class="kpi__value">12</strong></span></article>
+  </section>
+  <div class="toolbar card"><label class="toolbar__search"><i class="fa-solid fa-magnifying-glass"></i><input placeholder="Tìm SKU / tên sản phẩm"></label><span class="toolbar__spacer"></span><select><option>Danh mục</option><option>Thời trang</option><option>Phụ kiện</option></select><select><option>Trạng thái</option><option>Đang bán</option><option>Hết hàng</option></select><select><option>Sắp xếp</option><option>Mới nhất</option></select></div>
+  <article class="card data-card"><div class="card__header"><h2 class="section-title">Danh sách sản phẩm</h2></div><div class="card__body table-wrap"><table class="table table--roomy"><thead><tr><th>SKU</th><th>Sản phẩm</th><th>Danh mục</th><th>Giá bán</th><th>Tồn</th><th>Trạng thái</th></tr></thead><tbody><tr><td><a href="#">SP001</a></td><td>Áo thun nam</td><td>Thời trang</td><td>120,000đ</td><td>50</td><td><span class="badge badge--success">Đang bán</span></td></tr><tr><td><a href="#">SP002</a></td><td>Quần jean</td><td>Thời trang</td><td>250,000đ</td><td>8</td><td><span class="badge badge--warning">Sắp hết</span></td></tr><tr><td><a href="#">SP003</a></td><td>Giày thể thao</td><td>Giày dép</td><td>750,000đ</td><td>0</td><td><span class="badge badge--danger">Hết hàng</span></td></tr><tr><td><a href="#">SP004</a></td><td>Balo laptop</td><td>Phụ kiện</td><td>350,000đ</td><td>18</td><td><span class="badge badge--success">Đang bán</span></td></tr><tr><td><a href="#">SP005</a></td><td>Đồng hồ</td><td>Phụ kiện</td><td>850,000đ</td><td>12</td><td><span class="badge badge--success">Đang bán</span></td></tr></tbody></table></div></article>
+</div>
+{% endblock %}

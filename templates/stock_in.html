@@ -1,0 +1,18 @@
+{% extends 'base.html' %}
+{% block title %}Nhập kho · StorePro{% endblock %}
+{% block content %}
+<div class="page">
+  <header class="page__header"><div><h1 class="page__title">Nhập kho</h1><p class="page__subtitle">Quản lý phiếu nhập và hàng hóa từ nhà cung cấp</p></div><button class="button button--primary" data-modal-open="Tạo phiếu nhập">+ Tạo phiếu nhập</button></header>
+  <div class="grid grid--split">
+    <div class="stack">
+      <section class="kpi-grid kpi-grid--three">
+        <article class="kpi card"><span class="kpi__icon"><i class="fa-solid fa-file-arrow-down"></i></span><span class="kpi__copy"><span class="kpi__label">Phiếu nhập</span><strong class="kpi__value">128</strong></span></article>
+        <article class="kpi card"><span class="kpi__icon kpi__icon--success"><i class="fa-solid fa-coins"></i></span><span class="kpi__copy"><span class="kpi__label">Giá trị nhập</span><strong class="kpi__value">285,4M</strong></span></article>
+        <article class="kpi card"><span class="kpi__icon kpi__icon--warning"><i class="fa-solid fa-truck-field"></i></span><span class="kpi__copy"><span class="kpi__label">Nhà cung cấp</span><strong class="kpi__value">12</strong></span></article>
+      </section>
+      <article class="card data-card"><div class="card__header"><h2 class="section-title">Danh sách phiếu nhập</h2></div><div class="card__body table-wrap"><table class="table table--roomy"><thead><tr><th>Mã phiếu</th><th>Ngày</th><th>NCC</th><th>Tổng tiền</th><th>Trạng thái</th></tr></thead><tbody><tr><td><a href="#">PN00124</a></td><td>31/10</td><td>Công ty ABC</td><td>18,450,000đ</td><td><span class="badge badge--success">Hoàn thành</span></td></tr><tr><td><a href="#">PN00123</a></td><td>30/10</td><td>NCC XYZ</td><td>12,800,000đ</td><td><span class="badge">Đang nhập</span></td></tr><tr><td><a href="#">PN00122</a></td><td>28/10</td><td>Công ty DEF</td><td>45,200,000đ</td><td><span class="badge badge--success">Hoàn thành</span></td></tr><tr><td><a href="#">PN00121</a></td><td>26/10</td><td>Minh Phát</td><td>22,150,000đ</td><td><span class="badge badge--danger">Đã hủy</span></td></tr></tbody></table></div></article>
+    </div>
+    <aside class="card form-card"><h2>Tạo phiếu nhập kho</h2><form class="form" data-validate><label class="form__group"><span>Nhà cung cấp <b>*</b></span><select required><option value="">Chọn nhà cung cấp</option><option>Công ty ABC</option><option>NCC XYZ</option></select></label><label class="form__group"><span>Ngày nhập <b>*</b></span><input type="date" required></label><label class="form__group"><span>Kho nhập <b>*</b></span><select required><option>Kho chính</option><option>Kho Đà Nẵng</option></select></label><label class="form__group"><span>Ghi chú</span><input placeholder="Nội dung ghi chú"></label><div><h3>Danh sách sản phẩm</h3><div class="product-lines"><div class="product-line"><span>Áo thun</span><span>x 50</span><strong>6,000,000đ</strong></div><div class="product-line"><span>Giày thể thao</span><span>x 30</span><strong>19,500,000đ</strong></div><div class="product-line"><span>Balo laptop</span><span>x 20</span><strong>3,650,000đ</strong></div></div></div><div class="form-summary"><span>Tổng thanh toán</span><strong>29,150,000đ</strong></div><button class="button button--primary button--block" type="submit">Lưu phiếu nhập</button></form></aside>
+  </div>
+</div>
+{% endblock %}

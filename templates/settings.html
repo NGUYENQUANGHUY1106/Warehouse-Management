@@ -1,0 +1,11 @@
+{% extends 'base.html' %}
+{% block title %}Cài đặt · StorePro{% endblock %}
+{% block content %}
+<div class="page">
+  <header class="page__header"><div><h1 class="page__title">Cài đặt</h1><p class="page__subtitle">Cấu hình hệ thống và tài khoản</p></div></header>
+  <div class="settings-layout">
+    <aside class="card settings-nav" data-tabs><button class="is-active" data-tab="general">Cài đặt chung</button><button data-tab="account">Tài khoản</button><button data-tab="warehouse">Kho</button><button data-tab="notifications">Thông báo</button><button data-tab="security">Bảo mật</button><button data-tab="currency">Tiền tệ</button><button data-tab="invoice">In hóa đơn</button></aside>
+    <section class="card settings-pane"><div class="tab-panel is-active" data-panel="general"><h2>Cài đặt chung</h2><form class="form" data-validate><label class="form__group"><span>Tên doanh nghiệp</span><input required value="StorePro Shop"></label><label class="form__group"><span>Email hệ thống</span><input type="email" required value="hello@storepro.vn"></label><label class="form__group"><span>Số điện thoại</span><input required value="0901 234 567"></label><label class="form__group"><span>Múi giờ</span><select><option>Asia/Ho_Chi_Minh (UTC+7)</option></select></label><label class="form__group"><span>Đơn vị tiền tệ</span><select><option>VND — Việt Nam đồng</option><option>USD — US Dollar</option></select></label><button class="button button--primary" type="submit">Lưu thay đổi</button></form></div><div class="tab-panel" data-panel="account"><h2>Tài khoản</h2><p class="muted">Thông tin tài khoản quản trị và ảnh đại diện.</p></div><div class="tab-panel" data-panel="warehouse"><h2>Kho</h2><p class="muted">Thiết lập kho mặc định, ngưỡng tồn và quy tắc kiểm kê.</p></div><div class="tab-panel" data-panel="notifications"><h2>Thông báo</h2><p class="muted">Thiết lập email và cảnh báo tồn kho realtime.</p></div><div class="tab-panel" data-panel="security"><h2>Bảo mật</h2><p class="muted">Đổi mật khẩu và bật xác thực hai bước.</p></div><div class="tab-panel" data-panel="currency"><h2>Tiền tệ</h2><p class="muted">Quy tắc hiển thị và làm tròn tiền tệ.</p></div><div class="tab-panel" data-panel="invoice"><h2>In hóa đơn</h2><p class="muted">Logo, khổ giấy và nội dung chân trang hóa đơn.</p></div></section>
+  </div>
+</div>
+{% endblock %}
