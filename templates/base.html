@@ -86,6 +86,7 @@
   {% endif %}
 
   <main class="main-content">
+    {% if user.is_authenticated and messages %}<div class="message-stack">{% for message in messages %}<div class="alert {% if message.tags == 'error' %}alert--danger{% else %}alert--info{% endif %}">{{ message }}</div>{% endfor %}</div>{% endif %}
     {% block content %}{% endblock %}
   </main>
 

@@ -22,6 +22,7 @@ from apps.payments.api import PaymentViewSet
 from apps.products.api import (
     BrandViewSet,
     CategoryViewSet,
+    ProductImageViewSet,
     ProductVariantViewSet,
     ProductViewSet,
 )
@@ -36,6 +37,7 @@ router = DefaultRouter()
 router.register("stores", StoreViewSet)
 router.register("products", ProductViewSet)
 router.register("product-variants", ProductVariantViewSet)
+router.register("product-images", ProductImageViewSet)
 router.register("categories", CategoryViewSet)
 router.register("brands", BrandViewSet)
 router.register("warehouses", WarehouseViewSet)

@@ -1,3 +1,4 @@
+from django.db import transaction
 from rest_framework import serializers
 
 from .models import Brand, Category, Product, ProductImage, ProductVariant
@@ -28,6 +29,20 @@ class ProductImageSerializer(serializers.ModelSerializer):
     class Meta:
         model = ProductImage
         fields = "__all__"
+
+    @transaction.atomic
+    def create(self, validated_data):
+        product = validated_data["product"]
+        if validated_data.get("is_primary") or not product.images.exists():
+            product.images.update(is_primary=False)
+            validated_data["is_primary"] = True
+        return super().create(validated_data)
+
+    @transaction.atomic
+    def update(self, instance, validated_data):
+        if validated_data.get("is_primary"):
+            instance.product.images.exclude(pk=instance.pk).update(is_primary=False)
+        return super().update(instance, validated_data)
 
 
 class ProductVariantSerializer(serializers.ModelSerializer):

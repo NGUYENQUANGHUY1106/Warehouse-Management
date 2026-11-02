@@ -20,8 +20,8 @@ Quy ước trạng thái:
 | 2 | Custom User, đăng nhập, đăng xuất | HOÀN THÀNH | Hỗ trợ session và API token |
 | 3 | RBAC Admin/nhân viên | HOÀN THÀNH | 5 role, 35 permission, chặn API và trang HTML |
 | 4 | Phân tách dữ liệu theo gian hàng | HOÀN THÀNH | Queryset và thao tác ghi bị giới hạn theo StoreMember |
-| 5 | Sản phẩm, danh mục, thương hiệu, ảnh, biến thể | BACKEND XONG | **Chức năng tiếp theo:** kết nối CRUD vào giao diện thật |
-| 6 | Nhà cung cấp và khách hàng | BACKEND XONG | Model và API đã có, giao diện còn dữ liệu mẫu |
+| 5 | Sản phẩm, danh mục, thương hiệu, ảnh, biến thể | HOÀN THÀNH | CRUD thật, tìm kiếm/lọc, upload ảnh, biến thể và soft-delete |
+| 6 | Nhà cung cấp và khách hàng | BACKEND XONG | **Chức năng tiếp theo:** kết nối CRUD vào giao diện thật |
 | 7 | Nhập kho | BACKEND XONG | Service hoàn tất nhập và lịch sử kho đã có |
 | 8 | Xuất kho/chuyển kho | BACKEND XONG | Đã khóa dòng và chặn xuất vượt tồn |
 | 9 | Tồn kho và reservation 5 phút | BACKEND XONG | Service và test đã có, giao diện chưa kết nối API |
@@ -33,8 +33,7 @@ Quy ước trạng thái:
 ### Thứ tự phát triển tiếp theo
 
 ```text
-CRUD sản phẩm/danh mục
-→ CRUD nhà cung cấp và khách hàng
+CRUD nhà cung cấp và khách hàng
 → giao diện nhập kho
 → giao diện xuất kho
 → giao diện tồn kho
@@ -45,6 +44,41 @@ CRUD sản phẩm/danh mục
 
 Sau mỗi module hoàn thành phải cập nhật bảng này, ghi endpoint/action mới và
 chạy lại `python manage.py test` trước khi chuyển sang module tiếp theo.
+
+### Module sản phẩm đã hoàn thành
+
+Giao diện `/products/` đã bỏ dữ liệu mẫu và đọc trực tiếp từ PostgreSQL. Module
+hiện hỗ trợ:
+
+- Danh sách có phân trang, tìm theo SKU/barcode/tên, lọc danh mục/trạng thái và
+  sắp xếp theo tên, giá hoặc tồn kho.
+- KPI tổng sản phẩm, đang bán, sắp hết và hết hàng lấy từ database.
+- Thêm, xem chi tiết và cập nhật sản phẩm bằng Django ModelForm.
+- Quản lý danh mục cha–con và thương hiệu tại `/products/catalog/`.
+- Upload nhiều ảnh, chọn ảnh chính tự động và xóa ảnh.
+- Thêm/xóa biến thể theo SKU, barcode, giá và trạng thái.
+- Soft-delete sản phẩm: chuyển sang `ARCHIVED`, đặt `deleted_at`, không xóa lịch
+  sử tồn kho/giao dịch; có chức năng khôi phục.
+- Áp dụng `product.view/create/update/delete`, giới hạn theo store và ghi
+  Audit Log cho cả giao diện lẫn API.
+
+Các route giao diện:
+
+```text
+GET  /products/
+GET  /products/new/
+POST /products/new/
+GET  /products/{id}/
+GET  /products/{id}/edit/
+POST /products/{id}/edit/
+POST /products/{id}/delete/
+POST /products/{id}/restore/
+POST /products/{id}/images/add/
+POST /products/{id}/images/{image_id}/delete/
+POST /products/{id}/variants/add/
+POST /products/{id}/variants/{variant_id}/delete/
+GET  /products/catalog/
+```
 
 ## Công nghệ
 
@@ -248,7 +282,8 @@ Quy ước phản hồi bảo mật:
 - `404`: object không nằm trong queryset của store hiện hành.
 
 - `/api/stores/`, `/api/warehouses/`
-- `/api/products/`, `/api/product-variants/`, `/api/categories/`, `/api/brands/`
+- `/api/products/`, `/api/product-images/`, `/api/product-variants/`,
+  `/api/categories/`, `/api/brands/`
 - `/api/inventory/`, `/api/inventory-transactions/`,
   `/api/inventory-reservations/`, `/api/inventory-alerts/`
 - `/api/stock-in/`, `/api/stock-out/`, `/api/orders/`, `/api/payments/`
@@ -310,6 +345,7 @@ python manage.py makemigrations --check --dry-run
 python manage.py test
 ```
 
-Bộ test hiện kiểm tra đăng nhập session, token login, lọc dữ liệu theo store,
-Admin không thể ghi chéo store, nhân viên bị chặn endpoint ngoài quyền, giữ/nhả
-tồn kho, xuất vượt tồn và Audit Log bất biến.
+Bộ test hiện có 15 test, kiểm tra đăng nhập session, token login, lọc dữ liệu
+theo store, Admin không thể ghi chéo store, nhân viên bị chặn endpoint ngoài
+quyền, CRUD sản phẩm/danh mục/biến thể/ảnh, soft-delete, giữ/nhả tồn kho, xuất
+vượt tồn và Audit Log bất biến.

@@ -1,0 +1,3 @@
+{% extends 'base.html' %}
+{% block title %}{{ page_title }} · StorePro{% endblock %}
+{% block content %}<div class="page"><header class="page__header"><div><h1 class="page__title">{{ page_title }}</h1><p class="page__subtitle">Dữ liệu phân loại sản phẩm</p></div><a class="button button--secondary" href="{% url 'catalog' %}">← Quay lại</a></header><form class="card form-card form form-narrow" method="post" enctype="multipart/form-data">{% csrf_token %}{{ form.as_p }}<div class="modal__actions"><a class="button button--secondary" href="{% url 'catalog' %}">Hủy</a><button class="button button--primary" type="submit">Lưu</button></div></form></div>{% endblock %}
